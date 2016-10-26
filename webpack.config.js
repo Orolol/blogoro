@@ -1,38 +1,23 @@
-var path = require('path');
-
-require('es6-promise').polyfill();
-
 module.exports = {
-  entry: {
-        root: './client/app/Root.jsx'
-    },
+  entry: [
+    './public/src/index.js'
+  ],
   output: {
-    path: './public/',
-    filename: 'bundle.js',
-    publicPath: '/'
+    path: __dirname + '/public/',
+    publicPath: '/',
+    filename: 'bundle.js'
   },
   module: {
-    loaders: [
-      {
-        test: /\.jsx?$/,
-        exclude: /(node_modules|bower_components)/,
-        loader: 'babel',
-        query: {
-          plugins: ['transform-decorators-legacy' ],
-          presets: ["es2015", "react", "stage-0"]
-        }
-      },
-        { test: /\.css$/, loader: "style-loader!css-loader" },
-        {
-               test: /\.(eot|svg|ttf|woff|woff2)$/,
-               loader: 'file?name=adapublic/fonts/[name].[ext]'
-           },
-    ]
+    loaders: [{
+      exclude: /node_modules/,
+      loader: 'babel'
+    }]
   },
   resolve: {
-    alias: {
-      react: path.resolve('./node_modules/react'),
-    },
+    extensions: ['', '.js', '.jsx']
+  },
+  devServer: {
+    historyApiFallback: true,
+    contentBase: './public'
   }
 };
-
