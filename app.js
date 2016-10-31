@@ -6,10 +6,10 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var router = express.Router();
-var jwt    = require('jsonwebtoken'); 
+var jwt    = require('jsonwebtoken');
 
 //routes
-var users   = require('./routes/users'); 
+var users   = require('./routes/users');
 var posts = require('./routes/posts');
 
 var app = express();
@@ -45,11 +45,11 @@ app.use(function(req, res, next) {
 
   // decode token
   if (token) {
-    jwt.verify(token, process.env.JWT_SECRET, function(err, user) {      
+    jwt.verify(token, process.env.JWT_SECRET, function(err, user) {
       if (err) {
-        return res.status(401).json({ success: false, message: 'Failed to authenticate token.' });    
+        return res.status(401).json({ success: false, message: 'Failed to authenticate token.' });
       } else {
-        req.user = user;    
+        req.user = user;
         next();
       }
     });
